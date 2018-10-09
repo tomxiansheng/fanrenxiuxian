@@ -10,7 +10,10 @@ export class WxgamePlugin implements plugins.Command {
             if (filename == "libs/modules/promise/promise.js" || filename == 'libs/modules/promise/promise.min.js') {
                 return null;
             }
-            if (filename == 'libs/modules/egret/egret.js' || filename == 'libs/modules/egret/egret.min.js') {
+            if (filename == 'libs/modules/egret/egret.js' 
+            || filename == 'libs/modules/egret/egret.min.js'
+            || filename == 'libs/modules/socket/socket.js'
+            || filename == 'libs/modules/socket/socket.min.js') {
                 let content = file.contents.toString();
                 content += `;window.egret = egret;`;
                 content = content.replace(/definition = __global/, "definition = window");

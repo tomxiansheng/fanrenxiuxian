@@ -4,6 +4,7 @@
 import * as path from 'path';
 import { UglifyPlugin, CompilePlugin, ManifestPlugin, ExmlPlugin, EmitResConfigFilePlugin, TextureMergerPlugin, CleanPlugin } from 'built-in';
 import { WxgamePlugin } from './wxgame/wxgame';
+import { SubPackagePlugin } from './wxgame/SubPackage';
 import { CustomPlugin } from './myplugin';
 import * as defaultConfig from './config';
 
@@ -17,11 +18,41 @@ const config: ResourceManagerConfig = {
             return {
                 outputDir,
                 commands: [
-                    new CleanPlugin({ matchers: ["js", "resource"] }),
+                    new CleanPlugin({ matchers: ["js", "resource","subpackage"] }),
                     new CompilePlugin({ libraryType: "debug", defines: { DEBUG: true, RELEASE: false } }),
                     new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
                     new WxgamePlugin(),
-                    new ManifestPlugin({ output: 'manifest.js' })
+                    new UglifyPlugin([
+                    {
+                        sources: [
+                            "libs/modules/egret/egret.js",
+                            "libs/modules/game/game.js",
+                            "libs/modules/eui/eui.js",
+                            "libs/modules/assetsmanager/assetsmanager.js",
+                            "libs/modules/tween/tween.js",
+                            "libs/modules/socket/socket.js",
+                            "resource/default.thm.js",
+                        ],
+                        target: "lib.min.js"
+                    },
+                    {
+                        sources: ["main.js"],
+                        target: "main.min.js"
+                    }
+                    ]),
+                    // new ManifestPlugin({ output: 'manifest.js' })
+                    new SubPackagePlugin({
+                        output: 'manifest.js',
+                        subPackages: [
+                            {
+                                root: "subpackage",
+                                includes: [
+                                    "main.min.js",
+                                ]
+                            }
+                        ]
+                    }),
+                    new CustomPlugin(),
                 ]
             }
         }
@@ -29,16 +60,40 @@ const config: ResourceManagerConfig = {
             return {
                 outputDir,
                 commands: [
-                    new CleanPlugin({ matchers: ["js", "resource"] }),
+                    new CleanPlugin({ matchers: ["js", "resource","subpackage"] }),
                     new CompilePlugin({ libraryType: "release", defines: { DEBUG: false, RELEASE: true } }),
                     new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
                     new WxgamePlugin(),
-                    new UglifyPlugin([{
+                    new UglifyPlugin([
+                    {
+                        sources: [
+                            "libs/modules/egret/egret.js",
+                            "libs/modules/game/game.js",
+                            "libs/modules/eui/eui.js",
+                            "libs/modules/assetsmanager/assetsmanager.js",
+                            "libs/modules/tween/tween.js",
+                            "libs/modules/socket/socket.js",
+                        ],
+                        target: "lib.min.js"
+                    },
+                    {
                         sources: ["main.js"],
                         target: "main.min.js"
                     }
                     ]),
-                    new ManifestPlugin({ output: 'manifest.js' })
+                    // new ManifestPlugin({ output: 'manifest.js' })
+                    new SubPackagePlugin({
+                        output: 'manifest.js',
+                        subPackages: [
+                            {
+                                root: "subpackage",
+                                includes: [
+                                    "main.min.js",
+                                ]
+                            }
+                        ]
+                    }),
+                    new CustomPlugin(),
                 ]
             }
         }

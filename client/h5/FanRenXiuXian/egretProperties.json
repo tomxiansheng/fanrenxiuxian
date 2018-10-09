@@ -3,7 +3,7 @@
   "compilerVersion": "5.2.8",
   "template": {},
   "target": {
-    "current": "web"
+    "current": "wxgame"
   },
   "eui": {
     "exmlRoot": [
@@ -19,6 +19,9 @@
       "name": "egret"
     },
     {
+      "name": "game"
+    },
+    {
       "name": "eui"
     },
     {
@@ -29,6 +32,9 @@
     },
     {
       "name": "promise"
+    },
+    {
+      "name": "socket"
     }
   ]
 }
