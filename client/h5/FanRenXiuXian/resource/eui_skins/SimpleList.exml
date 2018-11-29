@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="SimpleListSkin" minWidth="20" minHeight="20" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+    <e:HScrollBar id="horizontalScrollBar" width="100%" bottom="0"/>
+    <e:VScrollBar id="verticalScrollBar" height="100%" right="0"/>
+	<e:List id="dataList" width="200" height="200"/>
+
+	<w:Config id="16665e60e3e" ></w:Config>
+</e:Skin>

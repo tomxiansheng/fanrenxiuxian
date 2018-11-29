@@ -1,1 +1,1 @@
-require("main.min.js")
+require("main.js")

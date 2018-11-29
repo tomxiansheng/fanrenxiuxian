@@ -1,5 +1,7 @@
-module tool {
-	export class MathTool {
+module tool 
+{
+	export class MathTool 
+	{
 		private constructor() {
 		}
 

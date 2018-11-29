@@ -1,0 +1,12 @@
+{
+    "16665e60e3e": {
+        "path": "core\\ui\\SimpleList.ts",
+        "class": "SimpleList",
+        "parentPath": "resource/eui_skins/ScrollerSkin.exml"
+    },
+    "166d23ee6b7": {
+        "path": "..\\resource\\assets\\Alert.ts",
+        "class": "Alert",
+        "parentPath": ""
+    }
+}

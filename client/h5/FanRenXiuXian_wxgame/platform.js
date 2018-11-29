@@ -5,6 +5,8 @@
 class WxgamePlatform {
 
     name = 'wxgame'
+    	
+    openDataContext = new WxgameOpenDataContext();
 
     login() {
         return new Promise((resolve, reject) => {
@@ -34,7 +36,85 @@ class WxgamePlatform {
         })
     }
 
-    openDataContext = new WxgameOpenDataContext();
+	shareAppMessage(title, imgurl, query) {
+		return new Promise((resolve, reject) => {
+			wx.showAppMessage({
+				title: title,
+				imageUrl: imgurl,
+				query: query,
+				success: res => {
+					resolve(true);
+				}
+				fail: res => {
+					console.log(res);
+					resolve(false);
+				}
+			})
+		})
+	}
+	
+	updateShareMenu(withShareTicket) {
+		return new Promise((resolve, reject) => {
+			wx.updateShareMenu({
+				withShareTicket: withShareTicket,
+				success: res => {
+					resolve(res)
+				},
+				fail: res => {
+					resolve(false)
+				}
+			})
+		})
+	}
+	
+	shareApp(title, imgurl, query) {
+		return this.updateShareMenu(true).then((res) => {
+			if (res) {
+				return new Promise((resolve, reject) => {
+					wx.shareAppMessage({
+						title: title,
+						imageUrl: imgurl,
+						query: query,
+						success: res => {
+							resolve(res);
+						},
+						fail: res => {
+							console.log(res);
+							resolve(false);
+						}
+					})
+				})
+			}
+		})
+	}
+	
+	showAD() {
+		console.log("未实现");
+	}
+    
+    setUserCloudStorage(KVDataList) {
+    	return new Promise((resolve, reject) => {
+    		wx.setUserCloudStorage({
+    			KVDataList: KVDataList,
+    			success: res => {
+    				console.log('success', res);
+    				resolve(res);
+    			},
+    			fail: res => {
+    				console.log('fail', res);
+    			}
+    		})
+    	})
+    }
+    
+    sendShareData(kvdata) {
+    	let openDataContext = wx.getOpenDataContext();
+    	openDataContext.postMessage(kvdata);
+    }
+    
+    getLaunchOptionsSync() {
+    	return wx.getLaunchOptionsSync();
+    }
 }
 
 class WxgameOpenDataContext {

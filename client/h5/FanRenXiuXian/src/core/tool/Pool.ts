@@ -14,7 +14,7 @@ module tool {
          */
 		public static getKeyByObj<T>(object: T): string 
         {
-            return object["__proto__"]["__class__"];
+            return egret.getQualifiedClassName(object);//object["__proto__"]["__class__"];
         }
 		/**
          * 通过类名获取key
@@ -22,7 +22,7 @@ module tool {
          */
         public static getKeyByCls<T>(cls: {new (): T}): string 
         {
-            return cls.prototype.__class__;
+            return egret.getQualifiedClassName(cls);
         }
  		/**
          * 对象池中获取一个对象

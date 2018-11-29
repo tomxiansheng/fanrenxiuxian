@@ -35,6 +35,10 @@
     },
     {
       "name": "socket"
+    },
+    {
+      "name": "jszip",
+      "path": "libs/jszip"
     }
   ]
 }

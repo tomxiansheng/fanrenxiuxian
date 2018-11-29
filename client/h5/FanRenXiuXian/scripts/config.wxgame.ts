@@ -31,14 +31,15 @@ const config: ResourceManagerConfig = {
                             "libs/modules/assetsmanager/assetsmanager.js",
                             "libs/modules/tween/tween.js",
                             "libs/modules/socket/socket.js",
+                            "libs/jszip/jszip.js",
                             "resource/default.thm.js",
                         ],
                         target: "lib.min.js"
                     },
-                    {
-                        sources: ["main.js"],
-                        target: "main.min.js"
-                    }
+                    // {
+                    //     sources: ["main.js"],
+                    //     target: "main.min.js"
+                    // }
                     ]),
                     // new ManifestPlugin({ output: 'manifest.js' })
                     new SubPackagePlugin({
@@ -47,7 +48,7 @@ const config: ResourceManagerConfig = {
                             {
                                 root: "subpackage",
                                 includes: [
-                                    "main.min.js",
+                                    "main.js",
                                 ]
                             }
                         ]
@@ -73,6 +74,8 @@ const config: ResourceManagerConfig = {
                             "libs/modules/assetsmanager/assetsmanager.js",
                             "libs/modules/tween/tween.js",
                             "libs/modules/socket/socket.js",
+                            "libs/jszip/jszip.js",
+                            "resource/default.thm.js",
                         ],
                         target: "lib.min.js"
                     },
